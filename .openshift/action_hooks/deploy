@@ -22,10 +22,10 @@ if [ ! -d $OPENSHIFT_DATA_DIR/jdk1.8.0_20 ]
                 rm -f *.tar.gz
 fi
 
-if [ ! -d $OPENSHIFT_DATA_DIR/apache-maven-3.2.3 ]
+if [ ! -d $OPENSHIFT_DATA_DIR/apache-maven-3.3.3 ]
         then
                 cd $OPENSHIFT_DATA_DIR
-                wget http://ftp.ps.pl/pub/apache/maven/maven-3/3.3.3/source/apache-maven-3.3.3-src.tar.gz
+                wget http://ftp.piotrkosoft.net/pub/mirrors/ftp.apache.org/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz
                 tar xvf *.tar.gz
                 rm -f *.tar.gz
 fi
@@ -37,4 +37,5 @@ export MAVEN_OPTS="-Xms384m -Xmx412m"
 export JAVA_HOME=$OPENSHIFT_DATA_DIR/jdk1.8.0_20
 export PATH=$JAVA_HOME/bin:$M2:$PATH
 
+mvn --version
 mvn -s settings.xml clean install
