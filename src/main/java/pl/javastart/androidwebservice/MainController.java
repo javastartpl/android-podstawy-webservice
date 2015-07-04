@@ -22,6 +22,9 @@ public class MainController {
 
 	@Autowired
 	private ExpenseRepository expenseRepository;
+
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	@Autowired
 	private DataSource dataSource;
@@ -34,6 +37,7 @@ public class MainController {
 
 	@Scheduled(cron = "0 0 3 * * *")
 	public void removeAllData() throws ScriptException, SQLException {
+        categoryRepository.deleteAll();
 		expenseRepository.deleteAll();
 		ScriptUtils.executeSqlScript(dataSource.getConnection(), new ClassPathResource("data.sql"));
 		System.out.println("All data removed " + new Date());
