@@ -1,4 +1,4 @@
-package androidwebservice;
+package pl.javastart.androidwebservice;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

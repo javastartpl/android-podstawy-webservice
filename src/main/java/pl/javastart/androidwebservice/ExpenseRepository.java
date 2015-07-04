@@ -1,4 +1,4 @@
-package androidwebservice;
+package pl.javastart.androidwebservice;
 
 import java.util.List;
 

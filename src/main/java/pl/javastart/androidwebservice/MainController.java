@@ -1,4 +1,4 @@
-package androidwebservice;
+package pl.javastart.androidwebservice;
 
 import java.sql.SQLException;
 import java.util.Date;

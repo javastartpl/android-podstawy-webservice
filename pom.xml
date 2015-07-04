@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>pl.javastart</groupId>
-	<artifactId>androidwebservice</artifactId>
+	<artifactId>pl.javastart.androidwebservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>androidwebservice</name>
-	<description>androidwebservice</description>
+	<name>pl.javastart.androidwebservice</name>
+	<description>pl.javastart.androidwebservice</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

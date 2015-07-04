@@ -1,4 +1,4 @@
-package androidwebservice;
+package pl.javastart.androidwebservice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
