@@ -11,9 +11,7 @@ import org.springframework.jdbc.datasource.init.ScriptException;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
@@ -30,10 +28,23 @@ public class MainController {
 	private DataSource dataSource;
 
 	@ResponseBody
-	@RequestMapping("/test")
-	public String test() {
-		return "Dziala! W bazie jest " + expenseRepository.count() + " wydatkow";
+	@RequestMapping(value = "/categories", method = RequestMethod.GET)
+	public Iterable<Category> getAllCategories() {
+		return categoryRepository.findAll();
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/categories", method = RequestMethod.POST)
+	public Category insertCategory(@RequestBody Category category) {
+		return categoryRepository.save(category);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
+	public Category getCategory(@PathVariable Long id) {
+		return categoryRepository.findOne(id);
+	}
+
 
 	@Scheduled(cron = "0 0 3 * * *")
 	public void removeAllData() throws ScriptException, SQLException {
