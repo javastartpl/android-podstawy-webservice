@@ -45,6 +45,11 @@ public class MainController {
 		return categoryRepository.findOne(id);
 	}
 
+    @ResponseBody
+    @RequestMapping(value = "/categories/{id}", method = RequestMethod.DELETE)
+    public void deleteCategory(@PathVariable Long id) {
+        categoryRepository.delete(id);
+    }
 
 	@Scheduled(cron = "0 0 3 * * *")
 	public void removeAllData() throws ScriptException, SQLException {
