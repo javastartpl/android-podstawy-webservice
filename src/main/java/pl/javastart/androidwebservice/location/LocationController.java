@@ -1,44 +1,40 @@
 package pl.javastart.androidwebservice.location;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.javastart.androidwebservice.Category;
 
-@Controller
+@RestController
 @RequestMapping("/locations")
 public class LocationController {
 
-    @Autowired
-    private LocationRepository locationRepository;
+    private final LocationRepository locationRepository;
 
-    @ResponseBody
-    @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
+    public LocationController(LocationRepository locationRepository) {
+        this.locationRepository = locationRepository;
+    }
+
+    @GetMapping("")
     public Iterable<Location> getAllCategories() {
         return locationRepository.findAll();
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Location getCategory(@PathVariable Long id) {
-        return locationRepository.findOne(id);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Location> getCategory(@PathVariable Long id) {
+        return locationRepository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @PostMapping("/")
     public Location addLocation(@RequestBody Location location) {
         return locationRepository.save(location);
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/", method = RequestMethod.DELETE)
+    @DeleteMapping("/")
     public void deleteLocation(@RequestBody Location location) {
         locationRepository.delete(location);
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @GetMapping("/test")
     public void test() {
         Location location = new Location();
         location.setName("Wroclaw");

@@ -1,4 +1,4 @@
-package pl.javastart.androidwebservice;
+package pl.javastart.androidwebservice.expense;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
