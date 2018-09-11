@@ -1,23 +1,13 @@
 package pl.javastart.androidwebservice.expense;
 
-import pl.javastart.androidwebservice.category.Category;
-
-import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity(name="expense")
-public class Expense {
+public class ExpenseDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
     private BigDecimal price;
-
-    @ManyToOne
-    private Category category;
+    private Long category;
 
     public Long getId() {
         return id;
@@ -25,14 +15,6 @@ public class Expense {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 
     public String getName() {
@@ -43,11 +25,20 @@ public class Expense {
         this.name = name;
     }
 
-    public Category getCategory() {
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Long getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(Long category) {
         this.category = category;
     }
+
 }

@@ -1,11 +1,11 @@
-INSERT INTO expense(id, name, category, user) values (1, 'Mleko', 'Jedzenie', 'Marcin');
-INSERT INTO expense(id, name, category, user) values (2, 'Piwo', 'Napoje', 'Marcin');
-INSERT INTO expense(id, name, category, user) values (3, 'Chleb', 'Jedzenie', 'Marcin');
-INSERT INTO expense(id, name, category, user) values (4, 'Spodnie', 'Ubrania', 'Marcin');
-
 INSERT INTO category VALUES (1, 'Jedzenie');
 INSERT INTO category VALUES (2, 'Napoje');
 INSERT INTO category VALUES (3, 'Ubrania');
+
+INSERT INTO expense(id, name, price, category_id) values (1, 'Mleko', 2.2, 1);
+INSERT INTO expense(id, name, price, category_id) values (2, 'Piwo', 3.99, 2);
+INSERT INTO expense(id, name, price, category_id) values (3, 'Chleb', 4.2, 1);
+INSERT INTO expense(id, name, price, category_id) values (4, 'Spodnie', 59, 3);
 
 INSERT INTO location(id, name, latitude, longitude, zoom) VALUES (1, 'Wrocław', 51.12435564007667, 17.026131749153137, 7.0);
 INSERT INTO location(id, name, latitude, longitude, zoom) VALUES (2, 'Warszawa', 52.20815544760742, 21.00586272776127, 7.0);
