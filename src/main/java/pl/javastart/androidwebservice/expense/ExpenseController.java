@@ -42,6 +42,22 @@ public class ExpenseController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ExpenseDto> updateExpense(@PathVariable Long id, @RequestBody ExpenseDto expenseDto) {
+        Optional<Expense> optionalExpense = expenseRepository.findById(id);
+        if(optionalExpense.isPresent()) {
+            Expense expense = optionalExpense.get();
+            expense.setPrice(expenseDto.getPrice());
+            expense.setName(expenseDto.getName());
+            setCategoryOrThrow(expenseDto, expense);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+        return expenseRepository.findById(id)
+                .map(expense -> ResponseEntity.ok(toDto(expense)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping("/{id}")
     public void deleteExpense(@PathVariable Long id) {
         expenseRepository.deleteById(id);
@@ -50,15 +66,19 @@ public class ExpenseController {
     private Expense toEntity(ExpenseDto expenseDto) {
         ModelMapper modelMapper = new ModelMapper();
         Expense expense = modelMapper.map(expenseDto, Expense.class);
-        if (expenseDto.getCategory() != null) {
+        setCategoryOrThrow(expenseDto, expense);
+        return expense;
+    }
+
+    private void setCategoryOrThrow(ExpenseDto expenseDto, Expense expense) {
+        if(expenseDto.getCategory() != null) {
             Optional<Category> categoryOptional = categoryRepository.findById(expenseDto.getCategory());
-            if (categoryOptional.isPresent()) {
+            if(categoryOptional.isPresent()) {
                 expense.setCategory(categoryOptional.get());
             } else {
                 throw new IllegalArgumentException("Category with id " + expenseDto.getCategory() + " not found");
             }
         }
-        return expense;
     }
 
     private ExpenseDto toDto(Expense expense) {
