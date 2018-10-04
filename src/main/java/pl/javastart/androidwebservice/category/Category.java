@@ -1,9 +1,10 @@
 package pl.javastart.androidwebservice.category;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import pl.javastart.androidwebservice.expense.Expense;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Category {
@@ -13,6 +14,10 @@ public class Category {
     private long id;
 
     private String name;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
+    private List<Expense> expenses;
 
     public String getName() {
         return name;
@@ -24,5 +29,13 @@ public class Category {
 
     public long getId() {
         return id;
+    }
+
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
     }
 }
